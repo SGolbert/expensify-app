@@ -4,7 +4,7 @@ playground/
 
 *.log
 
-**/public/bundle.js
-**/public/bundle.js.*
-**/public/styles.css
-**/public/styles.css.*
+public/bundle.js
+public/bundle.js.map
+public/styles.css
+public/styles.css.map

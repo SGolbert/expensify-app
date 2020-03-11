@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should not be shown with no expenses 1`] = `<p />`;
+
+exports[`should show multiple expenses' amount 1`] = `
+<div>
+  <p>
+    Viewing 
+    3
+     expense
+    s
+     totalling
+     
+    $1,141.95
+  </p>
+</div>
+`;
+
+exports[`should show single expense amount 1`] = `
+<div>
+  <p>
+    Viewing 
+    1
+     expense
+     totalling
+     
+    $45.00
+  </p>
+</div>
+`;

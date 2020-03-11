@@ -15,6 +15,7 @@ import getVisibleExpenses from "./selectors/expenses";
 import "normalize.css/normalize.css";
 import "./styles/style.scss";
 import "react-dates/lib/css/_datepicker.css";
+import "./firebase/firebase";
 
 const store = configureStore();
 
@@ -41,12 +42,6 @@ store.dispatch(
     createdAt: 1200
   })
 );
-
-// store.dispatch(setFilterText("water"));
-
-// setTimeout(() => {
-//   store.dispatch(setFilterText("bill"));
-// }, 3000);
 
 const state = store.getState();
 console.log(getVisibleExpenses(state.expenses, state.filters));

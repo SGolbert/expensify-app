@@ -15,24 +15,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
 
-const db = firebase.database();
+const database = firebase.database();
 
-db.ref().set({
-  name: "Seba Golb",
-  age: 35,
-  isSingle: true,
-  location: {
-    city: "Münster",
-    country: "Germany"
-  }
-});
-
-// db.ref().set("this is my data");
-
-db.ref("age").set(28);
-db.ref("location/city").set("Bochum");
-
-db.ref("attributes").set({
-  height: 180,
-  weight: 70.5
-});
+export { firebase, database as default };

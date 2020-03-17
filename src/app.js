@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import AppRouter from "./routers/AppRouter";
 import configureStore from "./stores/configureStore";
-import { addExpense, editExpense, removeExpense } from "./actions/expenses";
+import { startSetExpenses } from "./actions/expenses";
 import {
   setEndDate,
   setFilterText,
@@ -19,34 +19,14 @@ import "./firebase/firebase";
 
 const store = configureStore();
 
-store.dispatch(
-  addExpense({
-    description: "Water bill",
-    amount: 1000,
-    createdAt: 1000
-  })
-);
-
-store.dispatch(
-  addExpense({
-    description: "Gas bill",
-    amount: 7000,
-    createdAt: 1500
-  })
-);
-
-store.dispatch(
-  addExpense({
-    description: "Rent",
-    amount: 90000,
-    createdAt: 1200
-  })
-);
-
 const jsx = (
   <Provider store={store}>
     <AppRouter />
   </Provider>
 );
 
-ReactDOM.render(jsx, document.getElementById("app"));
+ReactDOM.render(<p>Loading...</p>, document.getElementById("app"));
+
+store.dispatch(startSetExpenses()).then(() => {
+  ReactDOM.render(jsx, document.getElementById("app"));
+});

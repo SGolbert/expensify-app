@@ -6,7 +6,9 @@ import {
   editExpense,
   removeExpense,
   setExpenses,
-  startSetExpenses
+  startSetExpenses,
+  startRemoveExpense,
+  startEditExpense
 } from "../../actions/expenses";
 import expenses from "../fixtures/expenses";
 import db from "../../firebase/firebase";
@@ -33,6 +35,27 @@ test("should set up remove expense action object", () => {
   });
 });
 
+test("should remove expense from database and store", done => {
+  const store = createMockStore({});
+  const expenseId = expenses[2].id;
+
+  store
+    .dispatch(startRemoveExpense(expenseId))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: "REMOVE_EXPENSE",
+        id: expenseId
+      });
+
+      return db.ref(`expenses/${actions[0].id}`).once("value");
+    })
+    .then(snapshot => {
+      expect(snapshot.val()).toEqual(null);
+      done();
+    });
+});
+
 test("should set up a edit expense action object", () => {
   const action = editExpense("123abc", {
     description: "lalala",
@@ -46,6 +69,39 @@ test("should set up a edit expense action object", () => {
       amount: 10500
     }
   });
+});
+
+test("should edit expense in database and store", done => {
+  const store = createMockStore({});
+  const updateId = expenses[1].id;
+  const updateData = {
+    description: "mouse",
+    amount: 3000,
+    note: "cute",
+    createdAt: 1000
+  };
+  store
+    .dispatch(startEditExpense(updateId, updateData))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: "EDIT_EXPENSE",
+        id: updateId,
+        updates: updateData
+      });
+
+      return db.ref(`expenses/${actions[0].id}`).once("value");
+    })
+    .then(snapshot => {
+      expect(snapshot.val()).toEqual({
+        description: expenses[1].description,
+        amount: expenses[1].amount,
+        note: expenses[1].note,
+        createdAt: expenses[1].createdAt,
+        ...updateData
+      });
+      done();
+    });
 });
 
 test("should set up add expense action object with provided values", () => {

@@ -5,3 +5,6 @@ playground/
 *.log
 
 public/dist/
+
+.env.test
+.env.development

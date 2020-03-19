@@ -51,7 +51,7 @@ test("should remove expense from database and store", done => {
       return db.ref(`expenses/${actions[0].id}`).once("value");
     })
     .then(snapshot => {
-      expect(snapshot.val()).toEqual(null);
+      expect(snapshot.val()).toBeFalsy();
       done();
     });
 });

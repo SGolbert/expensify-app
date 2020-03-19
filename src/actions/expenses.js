@@ -38,14 +38,6 @@ export const editExpense = (id, updates) => ({
 
 export const startEditExpense = (id, updates) => {
   return dispatch => {
-    // const {
-    //   description = "",
-    //   note = "",
-    //   amount = 0,
-    //   createdAt = 0
-    // } = expenseData;
-    // const expense = { description, note, amount, createdAt };
-
     return db
       .ref(`expenses/${id}`)
       .update(updates)

@@ -5,14 +5,7 @@ import AppRouter, { history } from "./routers/AppRouter";
 import configureStore from "./stores/configureStore";
 import { startSetExpenses } from "./actions/expenses";
 import { login, logout } from "./actions/auth";
-// import {
-//   setEndDate,
-//   setFilterText,
-//   setStartDate,
-//   sortByAmount,
-//   sortByDate
-// } from "./actions/filters";
-// import getVisibleExpenses from "./selectors/expenses";
+import LoadingPage from "./components/LoadingPage";
 import "normalize.css/normalize.css";
 import "./styles/style.scss";
 import "react-dates/lib/css/_datepicker.css";
@@ -34,7 +27,7 @@ const renderApp = () => {
   }
 };
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById("app"));
+ReactDOM.render(<LoadingPage />, document.getElementById("app"));
 
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
